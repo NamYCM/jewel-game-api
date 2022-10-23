@@ -7,7 +7,7 @@ plugins {
 jar {
 	manifest {
 		attributes(
-				'Main-Class': 'org.arpit.java2blog.AppMain'
+				'Main-Class': 'com.jewel.JewelApplication'
 		)
 	}
 }
