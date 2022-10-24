@@ -1,16 +1,22 @@
 package com.jewel.controller;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jewel.entity.levelMap.LevelData;
 import com.jewel.entity.levelMap.LevelMap;
+import com.jewel.entity.levelMap.grid.targetGrid.TargetGrid;
 import com.jewel.service.LevelMapService;
+import com.jewel.util.JsonUtil;
 import com.jewel.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -55,8 +61,7 @@ public class LevelMapController {
     @GetMapping("/get-all-map")
     public ResponseEntity<String> GetAllMap () throws ExecutionException, InterruptedException, JsonProcessingException {
         LevelData levelMap = levelMapService.GetAllMap();
-        ObjectMapper objectMapper = new ObjectMapper();
-
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
         return ResponseUtil.Response("all map", 200, objectMapper.writeValueAsString(levelMap));
     }
 

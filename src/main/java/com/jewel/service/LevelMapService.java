@@ -8,6 +8,7 @@ import com.google.cloud.firestore.SetOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.jewel.entity.levelMap.LevelData;
 import com.jewel.entity.levelMap.LevelMap;
+import com.jewel.util.JsonUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class LevelMapService {
 
     public LevelMap GetMap (int levelNumber) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
        return objectMapper.convertValue(dbFirestore.collection(COLLECTION_NAME).document(String.valueOf(levelNumber)).get().get().getData(), LevelMap.class);
     }
@@ -37,12 +38,13 @@ public class LevelMapService {
         List<QueryDocumentSnapshot> levelMaps = dbFirestore.collection(COLLECTION_NAME).get().get().getDocuments();
 
         HashMap<Integer, LevelMap> levelMapHashMap = new HashMap<>();
-        ObjectMapper objectMapper = new ObjectMapper();
-        ;
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
+
         levelMaps.forEach(levelMapSnapshot -> {
             if (levelMapSnapshot.getId().compareTo("version") != 0)
             {
                 LevelMap levelMap = objectMapper.convertValue(levelMapSnapshot.getData(), LevelMap.class);
+
                 levelMapHashMap.put(Integer.parseInt(levelMapSnapshot.getId()), levelMap);
             }
         });

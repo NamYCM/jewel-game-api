@@ -8,6 +8,7 @@ import com.jewel.entity.shop.ShopItem;
 import com.jewel.entity.user.User;
 import com.jewel.service.ShopService;
 import com.jewel.service.UserService;
+import com.jewel.util.JsonUtil;
 import com.jewel.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class UserController {
     @GetMapping("/{username}")
     public ResponseEntity<String> GetUser (@PathVariable("username") String username) throws ExecutionException, InterruptedException, JsonProcessingException {
         User user = userService.GetUser(username);
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         return ResponseUtil.Response(username, 200, objectMapper.writeValueAsString(user));
     }
@@ -48,7 +49,7 @@ public class UserController {
 
         userService.UpdateUser(user);
         user = userService.GetUser(user.getUsername());
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         return ResponseUtil.Response(user.getUsername(), 200, objectMapper.writeValueAsString(user));
     }

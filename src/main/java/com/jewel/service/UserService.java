@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 import com.jewel.entity.user.LevelData;
 import com.jewel.entity.PieceType;
 import com.jewel.entity.user.User;
+import com.jewel.util.JsonUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -34,7 +35,7 @@ public class UserService {
 
     public User GetUser (String username) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
         DocumentSnapshot userSnapshot = dbFirestore.collection(COLLECTION_NAME).document(username).get().get();
         User user = objectMapper.convertValue(userSnapshot.getData(), User.class);
         user.setUsername(username);
@@ -43,7 +44,7 @@ public class UserService {
 
     public void UpdateUser (User user) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         dbFirestore.collection(COLLECTION_NAME).document(user.getUsername()).update(objectMapper.convertValue(user, Map.class));
     }
@@ -238,7 +239,7 @@ public class UserService {
 
     public boolean AddLevelMapToAllUsers (int levelNumber) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         Iterator<DocumentReference> userRefs = dbFirestore.collection(COLLECTION_NAME).listDocuments().iterator();
 
@@ -275,7 +276,7 @@ public class UserService {
 
     public boolean DeleteLevelMapInAllUsers (int levelNumber) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         Iterator<DocumentReference> userRefs = dbFirestore.collection(COLLECTION_NAME).listDocuments().iterator();
 

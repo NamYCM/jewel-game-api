@@ -8,6 +8,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import com.jewel.entity.PieceType;
 import com.jewel.entity.shop.Shop;
 import com.jewel.entity.shop.ShopItem;
+import com.jewel.util.JsonUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutionException;
@@ -18,7 +19,7 @@ public class ShopService {
 
     public ShopItem GetItem (PieceType type) throws ExecutionException, InterruptedException, JsonProcessingException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         DocumentSnapshot shopItems = dbFirestore.collection(COLLECTION_NAME).document("items").get().get();
         Shop shop = objectMapper.convertValue(shopItems.getData(), Shop.class);
@@ -27,7 +28,7 @@ public class ShopService {
 
     public Shop GetAllItems () throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         DocumentSnapshot shopItems = dbFirestore.collection(COLLECTION_NAME).document("items").get().get();
         Shop shop = objectMapper.convertValue(shopItems.getData(), Shop.class);

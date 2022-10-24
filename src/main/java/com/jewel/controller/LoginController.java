@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.gson.JsonObject;
 import com.jewel.entity.user.User;
 import com.jewel.service.UserService;
+import com.jewel.util.JsonUtil;
 import com.jewel.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,7 @@ public class LoginController {
             user.setUsername(username);
             user.setPassword(password);
             user.setToken(result.get("idToken").getAsString());
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
             return ResponseUtil.Response(username, 200, objectMapper.writeValueAsString(user));
         }
     }
@@ -83,7 +84,7 @@ public class LoginController {
 
         user.setToken(token);
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         return ResponseUtil.Response(username, 200, objectMapper.writeValueAsString(user));
     }
@@ -106,7 +107,7 @@ public class LoginController {
         }
 
         user = userService.CreateUser(user.getUsername(), user.getPassword());
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         return  ResponseUtil.Response(user.getUsername(), 200, objectMapper.writeValueAsString(user));
     }

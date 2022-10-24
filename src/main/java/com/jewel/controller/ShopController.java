@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jewel.entity.levelMap.LevelMap;
 import com.jewel.entity.shop.Shop;
 import com.jewel.service.ShopService;
+import com.jewel.util.JsonUtil;
 import com.jewel.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ShopController {
     @GetMapping("/all-items")
     public ResponseEntity<String> GetAllItems () throws ExecutionException, InterruptedException, JsonProcessingException {
         Shop shop = shopService.GetAllItems();
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
 
         return ResponseUtil.Response("all map", 200, objectMapper.writeValueAsString(shop));
     }
