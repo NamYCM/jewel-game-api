@@ -10,8 +10,8 @@ public class JsonUtil {
     public static ObjectMapper GetObjectMapper () {
         if (objectMapper == null) {
             objectMapper = new ObjectMapper();
-            objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
-            objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+//            objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
+//            objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         }
 
         return objectMapper;

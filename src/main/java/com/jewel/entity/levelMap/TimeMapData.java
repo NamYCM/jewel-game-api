@@ -3,9 +3,9 @@ package com.jewel.entity.levelMap;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TimeMapData {
-    @JsonProperty("TargetScore")
+//    @JsonProperty("TargetScore")
     int TargetScore;
-    @JsonProperty("TimeInSecond")
+//    @JsonProperty("TimeInSecond")
     int TimeInSecond;
 
     public int getTargetScore() {

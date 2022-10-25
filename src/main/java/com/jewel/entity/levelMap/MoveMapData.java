@@ -3,9 +3,9 @@ package com.jewel.entity.levelMap;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MoveMapData {
-    @JsonProperty("MoveAmount")
+//    @JsonProperty("MoveAmount")
     int MoveAmount;
-    @JsonProperty("TargetScore")
+//    @JsonProperty("TargetScore")
     int TargetScore;
 
     public int getMoveAmount() {

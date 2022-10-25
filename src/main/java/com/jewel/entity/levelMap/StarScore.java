@@ -3,13 +3,13 @@ package com.jewel.entity.levelMap;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class StarScore {
-    @JsonProperty("LevelType")
+//    @JsonProperty("LevelType")
     int LevelType;
-    @JsonProperty("Star1Score")
+//    @JsonProperty("Star1Score")
     int Star1Score;
-    @JsonProperty("Star2Score")
+//    @JsonProperty("Star2Score")
     int Star2Score;
-    @JsonProperty("Star3Score")
+//    @JsonProperty("Star3Score")
     int Star3Score;
 
     public int getLevelType() {

@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class TargetGrid {
-    @JsonProperty("TargetGridName")
+//    @JsonProperty("TargetGridName")
     String TargetGridName;
-    @JsonProperty("ConnectColumns")
+//    @JsonProperty("ConnectColumns")
     List<ConnectColumn> ConnectColumns;
 
     public String getTargetGridName() {

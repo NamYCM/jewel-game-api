@@ -8,21 +8,21 @@ import com.jewel.entity.levelMap.grid.targetGrid.TargetGrid;
 import java.util.List;
 
 public class Grid {
-    @JsonProperty("InitialPieces")
+//    @JsonProperty("InitialPieces")
     List<InitialPiece> InitialPieces;
-    @JsonProperty("LossFertilityColumns")
+//    @JsonProperty("LossFertilityColumns")
     List<Integer> LossFertilityColumns;
-    @JsonProperty("Name")
+//    @JsonProperty("Name")
     String Name;
-    @JsonProperty("Position")
+//    @JsonProperty("Position")
     Position Position;
-    @JsonProperty("Rotation")
+//    @JsonProperty("Rotation")
     Rotation Rotation;
-    @JsonProperty("TargetGrids")
+//    @JsonProperty("TargetGrids")
     List<TargetGrid> TargetGrids;
-    @JsonProperty("X")
+//    @JsonProperty("X")
     int X;
-    @JsonProperty("Y")
+//    @JsonProperty("Y")
     int Y;
 
     public List<InitialPiece> getInitialPieces() {
