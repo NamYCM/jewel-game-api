@@ -38,7 +38,7 @@ public class UserService {
         ObjectMapper objectMapper = JsonUtil.GetObjectMapper();
         DocumentSnapshot userSnapshot = dbFirestore.collection(COLLECTION_NAME).document(username).get().get();
         User user = objectMapper.convertValue(userSnapshot.getData(), User.class);
-        user.setUsername(username);
+        if (user != null) user.setUsername(username);
         return user;
     }
 

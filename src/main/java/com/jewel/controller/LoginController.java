@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.gson.JsonObject;
 import com.jewel.entity.user.User;
+import com.jewel.service.LevelMapService;
 import com.jewel.service.UserService;
 import com.jewel.util.JsonUtil;
 import com.jewel.util.ResponseUtil;
@@ -20,6 +21,9 @@ import java.util.concurrent.ExecutionException;
 public class LoginController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LevelMapService levelMapService;
 
     @GetMapping("/sign-in-admin/{username}-{password}")
     public ResponseEntity<String> SignInAdmin (@PathVariable("username") String username, @PathVariable("password") String password) throws IOException {
@@ -127,5 +131,11 @@ public class LoginController {
         } else {
             return ResponseUtil.Response(email, 200, null);
         }
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> Test () throws ExecutionException, InterruptedException {
+        levelMapService.Update2To1();
+        return ResponseUtil.Response("update 2 to 1", 200, null);
     }
 }
