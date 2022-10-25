@@ -98,12 +98,4 @@ public class LevelMapService {
             dbFirestore.collection(COLLECTION_NAME).document(String.valueOf(levelNumber)).set(levelMap);
         });
     }
-
-    public void Update2To1 () throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        LevelMap levelMap = GetMap(2);
-        HashMap<Integer, LevelMap> levelMapHashMap = new HashMap<>();
-        levelMapHashMap.put(1, levelMap);
-        UpdateMap(levelMapHashMap);
-    }
 }

@@ -132,10 +132,4 @@ public class LoginController {
             return ResponseUtil.Response(email, 200, null);
         }
     }
-
-    @GetMapping("/test")
-    public ResponseEntity<String> Test () throws ExecutionException, InterruptedException {
-        levelMapService.Update2To1();
-        return ResponseUtil.Response("update 2 to 1", 200, null);
-    }
 }
