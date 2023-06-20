@@ -36,7 +36,9 @@ public class FirebaseInitialization {
             FirebaseApp.initializeApp(options);
 
             initTriggerLevelMap();
+            System.out.println("init successful");
         } catch (Exception e) {
+            System.out.println("init failed: " + e.getMessage());
             e.printStackTrace();
         }
     }
