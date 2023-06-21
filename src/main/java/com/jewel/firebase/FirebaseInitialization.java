@@ -10,6 +10,7 @@ import com.jewel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
@@ -29,11 +30,9 @@ public class FirebaseInitialization {
     @PostConstruct
     public void initialization () {
         try {
-            ClassPathResource cp = new ClassPathResource("serviceAccountKey.json");
-            FileInputStream serviceAccount = new FileInputStream(cp.getFile());
-
             FirebaseOptions options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setCredentials(GoogleCredentials.fromStream(
+                            ResourceUtils.getURL("classpath:serviceAccountKey.json").openStream()))
                     .setDatabaseUrl("https://testapi-d3e3a-default-rtdb.firebaseio.com")
                     .build();
             FirebaseApp.initializeApp(options);
