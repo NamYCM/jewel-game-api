@@ -1,5 +1,6 @@
 package com.jewel.firebase;
 
+import com.google.api.client.json.gson.GsonFactory;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
@@ -9,9 +10,11 @@ import com.jewel.service.LevelMapService;
 import com.jewel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,7 +31,9 @@ public class FirebaseInitialization {
     @PostConstruct
     public void initialization () {
         try {
-            FileInputStream serviceAccount = new FileInputStream("./serviceAccountKey.json");
+            FileInputStream serviceAccount = new
+                    FileInputStream(ResourceUtils.getFile("classpath:serviceAccountKey.json"));
+
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl("https://testapi-d3e3a-default-rtdb.firebaseio.com")
