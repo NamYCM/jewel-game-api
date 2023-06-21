@@ -8,6 +8,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import com.jewel.service.LevelMapService;
 import com.jewel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nullable;
@@ -28,18 +29,17 @@ public class FirebaseInitialization {
     @PostConstruct
     public void initialization () {
         try {
-//            FileInputStream serviceAccount = new FileInputStream("./serviceAccountKey.json");
+            ClassPathResource cp = new ClassPathResource("serviceAccountKey.json");
+            FileInputStream serviceAccount = new FileInputStream(cp.getFile());
+
             FirebaseOptions options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(
-                            getClass().getResourceAsStream("serviceAccountKey.json")))
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl("https://testapi-d3e3a-default-rtdb.firebaseio.com")
                     .build();
             FirebaseApp.initializeApp(options);
 
             initTriggerLevelMap();
-            System.out.println("init successful");
         } catch (Exception e) {
-            System.out.println("init failed: " + e.getMessage());
             e.printStackTrace();
         }
     }
